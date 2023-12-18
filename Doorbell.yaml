@@ -19,7 +19,7 @@ variables:
 trigger:
   - platform: state
     entity_id: !input doorbell_sensor
-    to: "on"
+    to: "ringing"
 
 action:
   - service: persistent_notification.create
