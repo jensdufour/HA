@@ -32,6 +32,6 @@ action:
     data:
       title: "Someone is at the door!"
       message: "Someone ringed the doorbell"
-  - service: notify.mobile_app_!input device_id
+  - service: notify.mobile_app_{{ device_id }}
     data:
       message: "Someone ringed the doorbell"
