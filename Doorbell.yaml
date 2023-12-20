@@ -1,20 +1,26 @@
 blueprint:
-  name: Doorbell ringing
+  name: Doorbell Notification
   description: >
     **Version: 0.1**
-    This blueprint shows an example automation that displays a Home Assistant notification when a someone rings the doorbell
-
+    This blueprint sends notification to mobile device when the doorbell is ringed
+    
   domain: automation
   input:
     doorbell_sensor:
-      name: Doorbell sensor *
+      name: Doorbell Sensor *
       description: The sensor associated with the doorbell ringing
       selector:
         entity:
           domain: sensor
-
+    device_id:
+      name: DeviceID *
+      description: The DeviceID associated with the mobile phone
+      selector:
+        text:
+        
 variables:
   doorbell_sensor: !input doorbell_sensor
+  device_id: !input device_id
 
 trigger:
   - platform: state
@@ -25,4 +31,7 @@ action:
   - service: persistent_notification.create
     data:
       title: "Someone is at the door!"
+      message: "Someone ringed the doorbell"
+  - service: notify.mobile_app_!input device_id
+    data:
       message: "Someone ringed the doorbell"
